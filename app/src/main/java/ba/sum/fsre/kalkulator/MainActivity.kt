@@ -83,7 +83,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onOperationClick(operation: String) {
-        if (currentNumber.isEmpty() || currentNumber == "0") return
+        if (currentNumber.isEmpty()) return
+
+        // If we're starting fresh after equals, start new expression with current number
+        if (shouldResetDisplay && expression.isEmpty()) {
+            expression = currentNumber + " $operation "
+            tvOperation.text = expression
+            shouldResetDisplay = true
+            return
+        }
+
+        // If user clicks operator right after another operator, replace the last operator
+        if (shouldResetDisplay && expression.isNotEmpty()) {
+            // Remove the last operator (last 3 characters: " + " or " - " etc.)
+            if (expression.endsWith(" ")) {
+                expression = expression.trimEnd().dropLast(1).trimEnd()
+            }
+            expression += " $operation "
+            tvOperation.text = expression
+            return
+        }
 
         // Add current number to expression if not already added
         if (!shouldResetDisplay) {
