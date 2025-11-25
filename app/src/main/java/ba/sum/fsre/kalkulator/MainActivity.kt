@@ -89,6 +89,7 @@ class MainActivity : AppCompatActivity() {
         if (shouldResetDisplay && expression.isEmpty()) {
             expression = currentNumber + " $operation "
             tvOperation.text = expression
+            tvDisplay.text = "0"
             shouldResetDisplay = true
             return
         }
@@ -101,6 +102,7 @@ class MainActivity : AppCompatActivity() {
             }
             expression += " $operation "
             tvOperation.text = expression
+            tvDisplay.text = "0"
             return
         }
 
@@ -111,6 +113,7 @@ class MainActivity : AppCompatActivity() {
 
         expression += " $operation "
         tvOperation.text = expression
+        tvDisplay.text = "0"
 
         shouldResetDisplay = true
     }
